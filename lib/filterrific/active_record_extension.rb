@@ -25,7 +25,7 @@ module Filterrific
       end
       self.filterrific_available_filters = []
 
-      Hashie.stringify_keys! opts
+      opts.stringify_keys!
 
       # define_sorted_by_scope(opts['sorted_by'])  if opts['sorted_by']
       # define_search_query_scope(opts['search_query'])  if opts['search_query']
@@ -99,9 +99,9 @@ module Filterrific
     end
 
     def assign_filterrific_default_filter_params(opts)
-      self.filterrific_default_filter_params = Hashie.stringify_keys (
+      self.filterrific_default_filter_params = (
         opts['default_filter_params'] || {}
-      )
+      ).stringify_keys
     end
 
     def validate_filterrific_default_filter_params

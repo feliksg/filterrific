@@ -29,8 +29,8 @@ module Filterrific
     def initialize_filterrific(model_class, filterrific_params, opts = {})
       # We used #deep_stringify_keys, however that breaks on Rails 3.x, so we
       # went back to #stringify_keys which should be sufficient.
-      f_params = Hashie.stringify_keys (filterrific_params.to_h || {})
-      opts = Hashie.stringify_keys opts
+      f_params = (filterrific_params || {}).stringify_keys
+      opts = opts.stringify_keys
       pers_id = if false == opts['persistence_id']
         nil
       else
@@ -47,7 +47,7 @@ module Filterrific
 
       filterrific = Filterrific::ParamSet.new(model_class, f_params)
       filterrific.select_options = opts['select_options']
-      session[pers_id] = filterrific.to_hash if pers_id
+      session[pers_id] = filterrific.to_hash  if pers_id
       filterrific
     end
 
@@ -63,12 +63,12 @@ module Filterrific
     # @param opts [Hash]
     # @param persistence_id [String, nil]
     def compute_filterrific_params(model_class, filterrific_params, opts, persistence_id)
-      r = Hashie.stringify_keys (
+      r = (
         filterrific_params.presence || # start with passed in params
         (persistence_id && session[persistence_id].presence) || # then try session persisted params if persistence_id is present
         opts['default_filter_params'] || # then use passed in opts
         model_class.filterrific_default_filter_params # finally use model_class defaults
-      )
+      ).stringify_keys
       r.slice!(*opts['available_filters'].map(&:to_s))  if opts['available_filters']
       r
     end
