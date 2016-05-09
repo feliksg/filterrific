@@ -6,7 +6,6 @@ require 'filterrific/param_set'
 
 module Filterrific
   module ActiveRecordExtension
-    include Hashie::Extensions::StringifyKeys
 
     # Adds Filterrific behavior to class when called like so:
     #

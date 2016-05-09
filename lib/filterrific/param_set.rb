@@ -7,7 +7,6 @@ module Filterrific
 
   # FilterParamSet is a container to store FilterParams
   class ParamSet
-    include Hashie::Extensions::StringifyKeys
 
     attr_accessor :model_class
     attr_accessor :select_options

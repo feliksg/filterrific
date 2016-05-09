@@ -6,7 +6,6 @@ module Filterrific
   module ActionControllerExtension
 
     include HasResetFilterrificUrlMixin
-    include Hashie::Extensions::StringifyKeys
 
   protected
 
