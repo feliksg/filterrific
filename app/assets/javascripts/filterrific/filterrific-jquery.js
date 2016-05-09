@@ -42,7 +42,7 @@ Filterrific.submitFilterForm = function(){
 // Copied from https://github.com/splendeo/jquery.observe_field
 // Wrap in immediately invoked function for compatibility with other js libraries
 //
-(function($) {
+$(document).on("turbolinks:load", function(){
 
   $.fn.filterrific_observe_field = function(frequency, callback) {
     frequency = frequency * 1000; // translate to milliseconds
@@ -75,12 +75,7 @@ Filterrific.submitFilterForm = function(){
       $this.bind('keyup click mousemove', reset); //mousemove is for selects
     });
   };
-})(jQuery);
 
-
-
-// Initialize event observers on document ready and turbolinks page:load
-jQuery(document).on('ready page:load', function() {
   // Add change event handler to all Filterrific filter inputs.
   $('#filterrific_filter').on(
     "change",

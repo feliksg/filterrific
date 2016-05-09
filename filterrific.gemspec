@@ -24,7 +24,8 @@ Gem::Specification.new do |gem|
     '{app,bin,doc,lib,spec}/**/*'
   ]
 
-  gem.add_dependency 'rails', ['>= 3.1.0']
+  gem.add_dependency 'rails', ['>= 5.0.0.beta4']
+  gem.add_dependency 'hashie', ['>= 3.4.4']
 
   gem.add_development_dependency 'bundler', ['>= 1.6.1']
   gem.add_development_dependency 'gem-release', ['>= 0.7.3']

@@ -6,6 +6,7 @@ require 'filterrific/param_set'
 
 module Filterrific
   module ActiveRecordExtension
+    include Hashie::Extensions::StringifyKeys
 
     # Adds Filterrific behavior to class when called like so:
     #
@@ -25,7 +26,7 @@ module Filterrific
       end
       self.filterrific_available_filters = []
 
-      opts.stringify_keys!
+      Hashie.stringify_keys! opts
 
       # define_sorted_by_scope(opts['sorted_by'])  if opts['sorted_by']
       # define_search_query_scope(opts['search_query'])  if opts['search_query']
@@ -99,9 +100,9 @@ module Filterrific
     end
 
     def assign_filterrific_default_filter_params(opts)
-      self.filterrific_default_filter_params = (
+      self.filterrific_default_filter_params = Hashie.stringify_keys (
         opts['default_filter_params'] || {}
-      ).stringify_keys
+      )
     end
 
     def validate_filterrific_default_filter_params
